@@ -11,10 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -30,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final File file = new File(this.getExternalFilesDir(Environment.DIRECTORY_DCIM), filename);
+        final File file = new File(this.getExternalFilesDir(Environment.DIRECTORY_DCIM), filename); // /storage/0/android/data/package/files/dcim/foto.png
 
         final ImageView foto = findViewById(R.id.imagem);
         Button tiraFoto = findViewById(R.id.btn_tirar);
@@ -50,12 +47,10 @@ public class MainActivity extends AppCompatActivity {
 
                 FileOutputStream out = null;
                 try {
-                    Toast.makeText(MainActivity.this,"chegou",Toast.LENGTH_SHORT).show(); ////////
                     out = new FileOutputStream(file);
                     bm.compress(Bitmap.CompressFormat.PNG, 100, out); // PNG is a lossless format, the compression factor (100) is ignored
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(MainActivity.this,"nao foi",Toast.LENGTH_SHORT).show(); ////////
                 } finally {
                     try {
                         if (out != null) {
