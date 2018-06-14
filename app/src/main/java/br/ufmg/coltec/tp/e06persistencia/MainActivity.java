@@ -2,30 +2,53 @@ package br.ufmg.coltec.tp.e06persistencia;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int FOTO_CODE = 281;
-
+    private static final String APP_PREF_ID = "PrefID1";
     private static final String filename = "foto.png";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SharedPreferences pref = this.getSharedPreferences(APP_PREF_ID, 0);
+
+        //pega hora de agora
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy-HH:mm:ss");
+        String hour = format.format(new Date());
+
+        //mostra hora do ultimo acesso
+        String hourAnt = pref.getString("ultimo_acesso", "none");
+        if(!hourAnt.equals("none")) Toast.makeText(this,"O último acesso foi em " + hourAnt,Toast.LENGTH_SHORT).show();
+        else Log.i("main", "Registro: primeiro registro de acesso");
+
+        //salva acesso
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("ultimo_acesso", hour);
+        editor.commit(); //usar apply faz essa tarefa correr em background
+        //////////////////////////
+
 
         final File file = new File(this.getExternalFilesDir(Environment.DIRECTORY_DCIM), filename); // /storage/0/android/data/package/files/dcim/foto.png
 
