@@ -8,7 +8,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="300dp"
         android:src="@color/colorPrimary"
         android:layout_margin="50dp"
         android:id="@+id/img"
@@ -23,10 +23,11 @@
         android:textSize="22dp"
         android:id="@+id/texto"/>
 
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@id/btn_banco"
         android:layout_alignStart="@id/btn_takepic"
         android:layout_alignEnd="@id/btn_takepic"
         android:text="Salvar Foto"
@@ -42,5 +43,14 @@
         android:layout_above="@id/btn_save"
         android:id="@+id/btn_takepic"
         />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/btn_takepic"
+        android:layout_alignEnd="@id/btn_takepic"
+        android:layout_alignParentBottom="true"
+        android:text="Banco de Dados"
+        android:id="@+id/btn_banco"/>
 
 </RelativeLayout>

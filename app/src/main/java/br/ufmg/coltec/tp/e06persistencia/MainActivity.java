@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button btn_takepic = findViewById(R.id.btn_takepic);
         Button btn_save = findViewById(R.id.btn_save);
+        Button btn_banco = findViewById(R.id.btn_banco);
 
         btn_takepic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,6 +90,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
+        });
+
+        btn_banco.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent  = new Intent(MainActivity.this, BancoActivity.class);
+                startActivity(intent);
+            }
         });
 
     }
