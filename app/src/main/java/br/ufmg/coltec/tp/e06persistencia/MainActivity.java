@@ -3,6 +3,7 @@ package br.ufmg.coltec.tp.e06persistencia;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -15,6 +16,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -22,10 +24,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
     private final static int FOTO_CODE = 1;
+    private static final String APP_PREF_ID = "MeuAppPrefID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +54,32 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        SharedPreferences pref = getBaseContext().getSharedPreferences(APP_PREF_ID, 0);
+        if (pref.getBoolean("firstrun", true)) {
+            // Do first run stuff here then set 'firstrun' as false
+            // using the following line to edit/commit prefs
+            pref.edit().putBoolean("firstrun", false).commit();
+        }
+        Integer day = pref.getInt("day", 0);
+        Integer month = pref.getInt("month", 0);
+        Integer year = pref.getInt("year", 0);
+        Integer hour = pref.getInt("hour", 0);
+        Integer minute = pref.getInt("minute", 0);
+        if(day != null || month != null || year != null || hour != null || minute != null) {
+            Toast.makeText(this, (day) + "/" + (month) + "/" + (year) + "-" + (hour) + ":" + minute, Toast.LENGTH_SHORT).show();
+        }
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt("day", Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+        editor.putInt("month", Calendar.getInstance().get(Calendar.MONTH));
+        editor.putInt("year", Calendar.getInstance().get(Calendar.YEAR));
+        editor.putInt("hour", Calendar.getInstance().get(Calendar.HOUR_OF_DAY));
+        editor.putInt("minute", Calendar.getInstance().get(Calendar.MINUTE));
+        editor.commit();
+    }
+
     public void editImage(View view) {
         Intent fotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(fotoIntent, FOTO_CODE);
@@ -58,14 +89,14 @@ public class MainActivity extends AppCompatActivity {
         ImageView imageView = findViewById(R.id.image);
         BitmapDrawable bitmapDrawable = ((BitmapDrawable) imageView.getDrawable());
         Bitmap bitmap = bitmapDrawable.getBitmap();
-        String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES).toString();
+        File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        path.mkdirs();
         File file = new File(path, "Foto.png");
         FileOutputStream out = null;
         try {
             if(Environment.getExternalStorageState(file).equals(Environment.MEDIA_MOUNTED)) {
                 out = new FileOutputStream(file);
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
-                MediaStore.Images.Media.insertImage(getContentResolver(),file.getAbsolutePath(),file.getName(),file.getName());
                 Log.d("File", "saveImage: OK");
             }
         } catch (Exception e) {
