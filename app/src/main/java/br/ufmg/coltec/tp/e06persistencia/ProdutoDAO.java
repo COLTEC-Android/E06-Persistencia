@@ -53,8 +53,9 @@ public class ProdutoDAO extends SQLiteOpenHelper {
         }
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public List<Produto> getAll() {
-        List<Produto> produtos = new ArrayList<>();   // lista que será retornada como resposta
+        List<Produto> produtos = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
 
         try {
