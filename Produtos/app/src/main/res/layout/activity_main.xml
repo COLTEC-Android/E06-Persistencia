@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#3A6FA1">
+
+    <EditText
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/lbl_nome"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:hint="Produto"
+        android:gravity="center"/>
+
+    <EditText
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/lbl_preco"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/lbl_nome"
+        android:layout_marginTop="30dp"
+        android:hint="Preço"
+        android:inputType="number"
+        android:gravity="center"/>
+
+    <Button
+        android:id="@+id/btn_salvar"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:layout_alignStart="@+id/lbl_preco"
+        android:layout_below="@+id/lbl_preco"
+        android:layout_marginTop="30dp"
+        android:background="#000"
+        android:text="Salvar"
+        android:textColor="#FFF" />
+
+    <Button
+        android:id="@+id/btn_carregar"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:layout_above="@+id/produtos_list"
+        android:layout_alignEnd="@+id/lbl_preco"
+        android:background="#000"
+        android:text="Carregar"
+        android:textColor="#FFF" />
+
+    <ListView
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:id="@+id/produtos_list"
+        android:layout_below="@+id/btn_salvar"
+        android:layout_marginTop="80dp"
+        android:layout_centerHorizontal="true"
+        android:background="#FFF">
+    </ListView>
+
+</RelativeLayout>
