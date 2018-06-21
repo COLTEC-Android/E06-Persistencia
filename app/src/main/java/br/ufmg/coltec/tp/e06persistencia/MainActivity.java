@@ -1,6 +1,7 @@
 package br.ufmg.coltec.tp.e06persistencia;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         final ImageView foto = findViewById(R.id.imagem);
         Button tiraFoto = findViewById(R.id.btn_tirar);
         Button salvaFoto = findViewById(R.id.btn_salvar);
+        Button addProduto = findViewById(R.id.btn_addproduto);
 
         tiraFoto.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -86,6 +88,13 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+            }
+        });
+
+        addProduto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,AddActivity.class));
             }
         });
     }
