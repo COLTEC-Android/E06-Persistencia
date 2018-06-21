@@ -38,14 +38,17 @@ public class MainActivity extends AppCompatActivity {
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy-HH:mm:ss");
         String hour = format.format(new Date());
 
+        final String defValueHoraIndefinida = "none";
+        final String keyHora = "ultimo_acesso";
+
         //mostra hora do ultimo acesso
-        String hourAnt = pref.getString("ultimo_acesso", "none");
-        if(!hourAnt.equals("none")) Toast.makeText(this,"O último acesso foi em " + hourAnt,Toast.LENGTH_SHORT).show();
+        String hourAnt = pref.getString(keyHora, defValueHoraIndefinida);
+        if(!hourAnt.equals(defValueHoraIndefinida)) Toast.makeText(this,"O último acesso foi em " + hourAnt,Toast.LENGTH_SHORT).show();
         else Log.i("main", "Registro: primeiro registro de acesso");
 
         //salva acesso
         SharedPreferences.Editor editor = pref.edit();
-        editor.putString("ultimo_acesso", hour);
+        editor.putString(keyHora, hour);
         editor.commit(); //usar apply faz essa tarefa correr em background
         //////////////////////////
 
