@@ -162,5 +162,4 @@ fabric.properties
 !/gradle/wrapper/gradle-wrapper.jar
 
 
-!/Fotos/**/*
 # End of https://www.gitignore.io/api/android,androidstudio

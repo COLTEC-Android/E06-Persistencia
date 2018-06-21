@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#2B2B2E">
+
+    <ImageButton
+        android:layout_width="128dp"
+        android:layout_height="170dp"
+        android:background="@null"
+        android:scaleType="fitXY"
+        android:src="@drawable/perfil_default"
+        android:id="@+id/img_preview"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_descricao"
+        android:text="Clique na imagem para tirar uma foto"
+        android:textColor="#FFFFFF"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/img_preview"
+        android:textSize="10dp"
+        android:fontFamily="casual"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/txt_descricao"
+        android:layout_marginTop="100dp"
+        android:background="#0E6FA1"
+        android:textColor="#FFFFFF"
+        android:text="Salvar"
+        android:id="@+id/btn_salvar"
+        />
+
+</RelativeLayout>
