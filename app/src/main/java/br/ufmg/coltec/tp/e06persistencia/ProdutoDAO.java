@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by a2016952894 on 14/06/18.
@@ -17,10 +16,10 @@ public class ProdutoDAO extends SQLiteOpenHelper {
     private static final int DB_VERSION = 1;
     private static final String DATABASE_NAME = "ProdutoDAO.sqlite";
 
-    private static final String SCRIPT_CREATE = "CREATE TABLE" +
+    private static final String SCRIPT_CREATE = "CREATE TABLE " +
             "IF NOT EXISTS produtos (" +
-            "produto_id INTEGER PRIMARY AUTOINCREMENT," +
-            "preco INTEGER NOT NULL" +
+            "produto_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "preco INTEGER NOT NULL, " +
             "nome TEXT" +
             ");";
 
@@ -47,7 +46,7 @@ public class ProdutoDAO extends SQLiteOpenHelper {
             ContentValues values = new ContentValues();
             values.put("nome", produto.getNome());
             values.put("preco", produto.getPreco());
-            db.insert("users", null, values);
+            db.insert("produtos", null, values);
         } catch(Exception e) {
             //trata exceção
         } finally {
@@ -56,13 +55,14 @@ public class ProdutoDAO extends SQLiteOpenHelper {
         }
     }
 
-    public List<Produto> getAll() {
-        List<Produto> produtos = new ArrayList<>();   // lista que será retornada como resposta
+    public ArrayList<Produto> getAll() {
+        ArrayList<Produto> produtos = new ArrayList<>();   // lista que será retornada como resposta
         SQLiteDatabase db = getReadableDatabase();
 
         try {
             // faz a leitura dos dados do banco
-            Cursor c = db.query("users", null, null, null, null, null, null);
+            Cursor c = db.query("produtos", null, null, null,
+                    null, null, null);
 
             if(c.moveToFirst()) {
                 do {
@@ -70,14 +70,11 @@ public class ProdutoDAO extends SQLiteOpenHelper {
                     String nome = c.getString(c.getColumnIndex("nome"));
                     Integer preco = Integer.parseInt(
                             c.getString(c.getColumnIndex("preco")));
-                    int id = Integer.parseInt(c.getString(c.getColumnIndex("id")));
+                    int id = Integer.parseInt(c.getString(c.getColumnIndex("produto_id")));
 
                     // cria objeto user a partir dos dados retornados do banco
-                    Produto produto = new Produto();
-                    produto.setNome(nome);
-                    produto.setPreco(preco);
+                    Produto produto = new Produto(nome, preco);
                     produto.setId(id);
-
                     // adiciona user na lista que será retornada
                     produtos.add(produto);
                 } while(c.moveToNext());

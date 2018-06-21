@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     public ImageButton mTakePhotoBtn;
     public Button mSaveBtn;
     public ImageView mViewPhoto;
+    public Button mBtnIntentProduto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         mSaveBtn = findViewById(R.id.save_btn);
         mTakePhotoBtn = findViewById(R.id.takePhoto_imBtn);
         mViewPhoto = findViewById(R.id.photo_iv);
+        mBtnIntentProduto = findViewById(R.id.btn_intent);
 
         getLastAccess();
         setLastAccess();
@@ -56,6 +58,15 @@ public class MainActivity extends AppCompatActivity {
                 savePhotoFile(((BitmapDrawable)mViewPhoto.getDrawable()).getBitmap());
             }
         });
+
+        mBtnIntentProduto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ProductActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
