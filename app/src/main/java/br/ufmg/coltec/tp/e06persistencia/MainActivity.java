@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +20,8 @@ public class MainActivity extends Activity {
     private static int FOTO_CODE = 1;
     private int pictureCounter = 0;
     private boolean atualSalva = false; //indica de a foto atual do ImageView já foi salva
+    private static final String APP_PREF_ID="Android-E06-Persistencia";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +30,16 @@ public class MainActivity extends Activity {
         final ImageView foto = (ImageView) findViewById(R.id.imagemView);
         Button changePic = (Button) findViewById(R.id.changePicbtn);
         Button savePic = (Button) findViewById(R.id.savePicbtn);
+
+        /* Ultimo acesso tem uma classe própria com o objetivo de melhorar a legibilidade do código
+            Na prática, não sei se seria muito útil.
+         */
+        UltimoAcesso ultimo = new UltimoAcesso(getApplicationContext(),APP_PREF_ID );
+        if(ultimo.existeChave()){
+            Toast toast = Toast.makeText(getApplicationContext(), ultimo.getUltimoAcesso(), Toast.LENGTH_LONG);
+            toast.show();
+        }
+        ultimo.setUltimoAcesso();
 
         changePic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +66,7 @@ public class MainActivity extends Activity {
        });
 
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         ImageView imagem = findViewById(R.id.imagemView);
@@ -66,24 +78,20 @@ public class MainActivity extends Activity {
             imagem.setImageBitmap(photo);
         }
     }
-    private boolean salvaFoto(String nome, ImageView foto) {//essa função é a mesma que eu usei no trab de recuperação
-        //final ImageView foto = findViewById(R.id.foto);
+
+    private boolean salvaFoto(String nome, ImageView foto) {
         final String filename = nome+".png";
-        final File file = new File(this.getExternalFilesDir(Environment.DIRECTORY_DCIM), filename);  // /storage/0/android/data/package/files/dcim/foto.png
+        final File file = new File(this.getExternalFilesDir(Environment.DIRECTORY_DCIM), filename);
         boolean imagemSalva = false;
 
         if(((BitmapDrawable)foto.getDrawable())!=null){
-
             Bitmap bm=((BitmapDrawable)foto.getDrawable()).getBitmap(); //Extrair foto do imageview
-
             FileOutputStream out = null;
             try {
-
                 out = new FileOutputStream(file);
                 bm.compress(Bitmap.CompressFormat.PNG, 100, out);
             } catch (Exception e) {
                 e.printStackTrace();
-
             } finally {
                 try {
                     if (out != null) {
@@ -91,13 +99,11 @@ public class MainActivity extends Activity {
                         imagemSalva = true;
                         Toast toast = Toast.makeText(getApplicationContext(), "Imagem salva em '"+this.getExternalFilesDir(Environment.DIRECTORY_DCIM)+"'", Toast.LENGTH_LONG);
                         toast.show();
-
                     };
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-
         }
         return imagemSalva;
     }
