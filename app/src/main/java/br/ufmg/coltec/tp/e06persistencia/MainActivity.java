@@ -7,6 +7,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -107,4 +109,27 @@ public class MainActivity extends Activity {
         }
         return imagemSalva;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_add:
+                // inicia a activity Cadastro_Produto quando o usuário clica no botão correspondente
+                Intent intent = new Intent(MainActivity.this, Produtos.class);
+                startActivity(intent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 }
+
+
