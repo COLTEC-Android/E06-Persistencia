@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -18,11 +19,15 @@ public class AddActivity extends AppCompatActivity {
         String produtos = "";
         ArrayList<Produto> lista = (ArrayList<Produto>) dao.getAll();
 
-        for (int i=0;i<lista.size();i++){
-            produtos = produtos + lista.get(i).getNome() + " -- R$" + lista.get(i).getPreco() + "\n";
+        if(lista.size()<=0){
+            Toast.makeText(this,"Você não adicionou produtos ainda",Toast.LENGTH_SHORT).show();
         }
-
-        listaProdutos.setText(produtos);
+        else {
+            for (int i = 0; i < lista.size(); i++) {
+                produtos = produtos + lista.get(i).getNome() + " -- R$" + lista.get(i).getPreco() + "\n";
+            }
+            listaProdutos.setText(produtos);
+        }
     }
 
     @Override
@@ -38,7 +43,7 @@ public class AddActivity extends AppCompatActivity {
 
         final EditText nomeProduto = findViewById(R.id.txt_nome);
         final EditText precoProduto = findViewById(R.id.txt_preco);
-        Button botao = findViewById(R.id.btn_addproduto);
+        Button botao = findViewById(R.id.botao_add);
 
         final ProdutoDAO dao = ProdutoDAO.getInstance(AddActivity.this);
 
@@ -50,7 +55,6 @@ public class AddActivity extends AppCompatActivity {
                 mostrarProdutos();
             }
         });
-
 
     }
 

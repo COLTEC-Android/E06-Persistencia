@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:hint="Preço (R$)"
             android:layout_below="@id/txt_nome"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:id="@+id/txt_preco"/>
 
         <Button
@@ -31,7 +31,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@id/txt_preco"
-            android:text="Adicionar"/>
+            android:text="Adicionar"
+            android:id="@+id/botao_add"/>
 
     </RelativeLayout>
 
