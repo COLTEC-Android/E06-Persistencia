@@ -13,17 +13,18 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class MainActivity extends Activity {
     private static int FOTO_CODE = 1;
-
+    private int pictureCounter = 0;
+    private boolean atualSalva = false; //indica de a foto atual do ImageView já foi salva
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         final ImageView foto = (ImageView) findViewById(R.id.imagemView);
         Button changePic = (Button) findViewById(R.id.changePicbtn);
@@ -33,37 +34,22 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent fotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(fotoIntent, FOTO_CODE);
+                try {
+                    startActivityForResult(fotoIntent, FOTO_CODE);
+                    atualSalva=false;
+                }catch (Exception e){}
             }
         });
 
         savePic.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               FileOutputStream output = null;
-               String path = Environment.getExternalStorageDirectory().toString();
-
-               BitmapDrawable bitmapDrawable = ((BitmapDrawable) foto.getDrawable());
-               Bitmap bitmap = bitmapDrawable .getBitmap();
-
-               Toast toast = Toast.makeText(getApplicationContext(), path, Toast.LENGTH_SHORT);
-               toast.show();
-
-               try {
-                   output = new FileOutputStream(path+"imagem.png");
-                   bitmap.compress(Bitmap.CompressFormat.PNG, 100, output); // bmp is your Bitmap instance
-
-               }catch (Exception e){
-                   e.printStackTrace();
-               }finally {
-                   try {
-                       if (output != null) {
-                           output.close();
-                       }
-                   } catch (IOException e) {
-                       e.printStackTrace();
-                   }
-
+               if(!atualSalva) {//evita que uma imagem seja duplicada
+                   atualSalva = salvaFoto(Integer.toString(pictureCounter), foto);
+                   pictureCounter++;
+               }else{
+                   Toast toast = Toast.makeText(getApplicationContext(), "Essa imagem já foi salva", Toast.LENGTH_SHORT);
+                   toast.show();
                }
            }
        });
@@ -79,5 +65,40 @@ public class MainActivity extends Activity {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             imagem.setImageBitmap(photo);
         }
+    }
+    private boolean salvaFoto(String nome, ImageView foto) {//essa função é a mesma que eu usei no trab de recuperação
+        //final ImageView foto = findViewById(R.id.foto);
+        final String filename = nome+".png";
+        final File file = new File(this.getExternalFilesDir(Environment.DIRECTORY_DCIM), filename);  // /storage/0/android/data/package/files/dcim/foto.png
+        boolean imagemSalva = false;
+
+        if(((BitmapDrawable)foto.getDrawable())!=null){
+
+            Bitmap bm=((BitmapDrawable)foto.getDrawable()).getBitmap(); //Extrair foto do imageview
+
+            FileOutputStream out = null;
+            try {
+
+                out = new FileOutputStream(file);
+                bm.compress(Bitmap.CompressFormat.PNG, 100, out);
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            } finally {
+                try {
+                    if (out != null) {
+                        out.close();
+                        imagemSalva = true;
+                        Toast toast = Toast.makeText(getApplicationContext(), "Imagem salva em '"+this.getExternalFilesDir(Environment.DIRECTORY_DCIM)+"'", Toast.LENGTH_LONG);
+                        toast.show();
+
+                    };
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+        return imagemSalva;
     }
 }
