@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -15,11 +16,14 @@ public class ProdutosAdapter extends BaseAdapter{
 
     public ProdutosAdapter(Context context) {
         this.context = context;
-        //ProdutoDAO dao = new ProdutoDAO(context);
-        //produtos = dao.getAll();
-        produtos=new ArrayList<>();
-        produtos.add(new Produto("Teste",50));
+        ProdutoDAO dao = new ProdutoDAO(context);
+        produtos = dao.getAll();
+
+
+        /*produtos=new ArrayList<>();
+        produtos.add(new Produto("Teste",50));*/
     }
+
     @Override
     public int getCount() {
         return this.produtos.size();

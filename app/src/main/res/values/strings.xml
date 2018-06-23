@@ -2,4 +2,8 @@
     <string name="app_name">E06: Persistencia</string>
     <string name="products">Produtos</string>
 
+    <string name="addProdutoValor">Valor (R$):</string>
+    <string name="addProdutoNome">Nome:</string>
+    <string name="addProdutoBotao">Adicionar</string>
+
 </resources>

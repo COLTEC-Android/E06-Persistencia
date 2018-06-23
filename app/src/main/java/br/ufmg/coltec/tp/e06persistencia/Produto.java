@@ -6,13 +6,13 @@ public class Produto {
     private double preco;
 
     public Produto(Integer ID, String nome, double preco ){
-        this.ID=ID;
+        this.ID=ID; //o ID para caso fosse necessário acessar dados do DB, o acesso através do campo nome não é o ideal
         this.nome=nome;
         this.preco=preco;
     }
 
     public Produto(String nome, double preco ){
-        this.ID=null;
+        this.ID=0;
         this.nome=nome;
         this.preco=preco;
     }
@@ -35,4 +35,7 @@ public class Produto {
     public void setPreco(Float preco) {
         this.preco = preco;
     }
+
+
+
 }

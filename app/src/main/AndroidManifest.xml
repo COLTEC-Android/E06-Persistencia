@@ -16,6 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Produtos"></activity>
+        <activity android:name=".AdicionaProduto"></activity>
     </application>
 
 </manifest>
