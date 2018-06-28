@@ -44,10 +44,19 @@ public class MainActivity extends AppCompatActivity {
 
         Button capture = findViewById(R.id.capture);
         Button save = findViewById(R.id.save);
+        Button btnp = findViewById(R.id.btnProduto);
 
         SharedPreferences pref = getBaseContext().getSharedPreferences(APP_PREF_ID, 0);
         SharedPreferences.Editor editor = pref.edit();
         String data = pref.getString("Data", "");
+
+        btnp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, addProduto.class);
+                startActivity(intent);
+            }
+        });
 
         if(!data.equals("")){
             Toast.makeText(getBaseContext(), data, Toast.LENGTH_LONG).show();
