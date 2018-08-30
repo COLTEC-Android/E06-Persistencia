@@ -26,4 +26,4 @@ Você deverá adicionar um registro na inicialização do aplicativo para armaze
 
 Implemente uma nova tela no aplicativo que fará o armazenamento de produtos. Essa tela deverá conter o formulário com dois campos: (a) nome do produto; (b) preço do produto.
 
-Você deverá implementar uma classe chamada `ProdutoDAO` que será responsável pelo armazenamento e leitura dos produtos cadastrados anteriormente. Sua classe deverá ter um método `void insert(Produto p)` para fazer a inserção do produto e `List<Produto> getAll()` para retornar todos os produtos cadastrados.
+Você deverá implementar uma classe chamada `br.ufmg.coltec.tp.e06persistencia.ProdutoDAO` que será responsável pelo armazenamento e leitura dos produtos cadastrados anteriormente. Sua classe deverá ter um método `void insert(br.ufmg.coltec.tp.e06persistencia.Produto p)` para fazer a inserção do produto e `List<br.ufmg.coltec.tp.e06persistencia.Produto> getAll()` para retornar todos os produtos cadastrados.
