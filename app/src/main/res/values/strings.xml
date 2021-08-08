@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">E06: Persistencia</string>
+    <string name="btn_tirar_foto">Tirar foto</string>
+    <string name="btn_salvar_foto">Salvar foto</string>
+    <string name="string_foto_salva">Foto salva com sucesso!</string>
 </resources>
