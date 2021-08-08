@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences pref2 = this.getSharedPreferences(APP_PREF_ID, 0);
         String data = pref2.getString("chaveData", "");
 
-        if (data != null) {
+        if (!data.equals("")) {
             Toast.makeText(MainActivity.this, data, Toast.LENGTH_LONG).show();
         }
 
