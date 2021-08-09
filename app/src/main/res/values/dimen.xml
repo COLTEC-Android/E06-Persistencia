@@ -4,4 +4,5 @@
     <dimen name="dimens_img_width">300sp</dimen>
     <dimen name="dimens_img_height">300sp</dimen>
     <dimen name="dimens_margin_foto">25sp</dimen>
+    <dimen name="dimens_txt_hint">40sp</dimen>
 </resources>

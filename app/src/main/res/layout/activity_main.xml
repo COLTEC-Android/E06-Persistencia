@@ -12,7 +12,7 @@
         android:id="@+id/btn_tirar_foto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btn_tirar_foto"
+        android:text="@string/string_btn_tirar_foto"
         android:textSize="@dimen/dimens_txt_btn"/>
 
     <ImageView
@@ -25,7 +25,7 @@
         android:id="@+id/btn_salvar_foto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btn_salvar_foto"
+        android:text="@string/string_btn_salvar_foto"
         android:textSize="@dimen/dimens_txt_btn"/>
 
 </LinearLayout>
