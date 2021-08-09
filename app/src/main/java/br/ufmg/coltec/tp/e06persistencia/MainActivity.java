@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnCamera = findViewById(R.id.buttonCamera);
         Button btnSavePhoto = findViewById(R.id.buttonSavePhoto);
+        Button btnSecondActivity = findViewById(R.id.buttonSecondActivity);
 
         btnCamera.setOnClickListener(view -> {
             Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -58,6 +59,11 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
+        });
+
+        btnSecondActivity.setOnClickListener(view -> {
+            Intent intent = new Intent(this, SecondActivity.class);
+            startActivity(intent);
         });
     }
 
