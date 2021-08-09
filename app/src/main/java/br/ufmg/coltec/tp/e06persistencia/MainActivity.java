@@ -1,9 +1,12 @@
 package br.ufmg.coltec.tp.e06persistencia;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Environment;
+import android.os.PersistableBundle;
 import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,15 +18,23 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
     private Bitmap imageBitmap;
+    private static final String APP_PREF_ID = "MyAppPrefID";
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        pref = MainActivity.this.getSharedPreferences(APP_PREF_ID, 0);
+        editor = pref.edit();
+        setLastAcess(new Date());
 
         Button btnCamera = findViewById(R.id.buttonCamera);
         Button btnSavePhoto = findViewById(R.id.buttonSavePhoto);
@@ -62,5 +73,21 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Toast.makeText(MainActivity.this, "Last acess: "+getLastAcess(), Toast.LENGTH_LONG).show();
+    }
 
+    private void setLastAcess(Date currentDate){
+        String date = new SimpleDateFormat("dd/MM/yyyy").format(currentDate);
+        String hour = new SimpleDateFormat("HH:mm").format(currentDate);
+        editor.putString("lastAcess", date + " - " + hour);
+        editor.commit();
+    }
+
+    private String getLastAcess(){
+        String lastAcess = pref.getString("lastAcess", "");
+        return lastAcess;
+    }
 }
