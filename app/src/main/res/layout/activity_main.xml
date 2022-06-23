@@ -29,4 +29,11 @@
         android:text="Salvar foto"
         android:layout_gravity="center_horizontal"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_telaProduto"
+        android:text="Tela de produtos"
+        android:layout_gravity="center_horizontal"/>
+
 </LinearLayout>

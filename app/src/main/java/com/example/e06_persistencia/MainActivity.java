@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         Button fotoBtn = findViewById(R.id.btn_tirarFoto);
         Button btnSalvarFoto = findViewById(R.id.btn_salvarFoto);
         ImageView fotoImageView = findViewById(R.id.img_foto);
+        Button btnTelaProduto = findViewById(R.id.btn_telaProduto);
 
         SharedPreferences pref = MainActivity.this.getBaseContext().getSharedPreferences(APP_PREF_ID, 0);
 
@@ -63,10 +64,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnSalvarFoto.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
+        btnSalvarFoto.setOnClickListener((view) -> {
                 Long tsLong = System.currentTimeMillis()/1000;
                 String timeStamp = tsLong.toString();
                 File file = new File(MainActivity.this.getBaseContext().getExternalFilesDir(null), "" + timeStamp + ".png");
@@ -83,7 +81,11 @@ public class MainActivity extends AppCompatActivity {
                     Log.e("File", "Erro ao gravar arquivo:" + e.toString());
                 }
 
-            }
+        });
+
+        btnTelaProduto.setOnClickListener((view)->{
+            Intent intent = new Intent(MainActivity.this, TelaProduto.class);
+            startActivity(intent);
         });
 
     }
