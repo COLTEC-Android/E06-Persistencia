@@ -1,4 +1,4 @@
-package com.example.e06_persistencia;
+package pack.rafaalt.ex06;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,12 +13,12 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class ProdutoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_produto);
 
         ProdutoDAO dao = new ProdutoDAO(new Database(this));
         Button btnAdd = findViewById(R.id.btnAdd);

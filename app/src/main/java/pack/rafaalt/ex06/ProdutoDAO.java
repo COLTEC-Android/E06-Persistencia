@@ -1,4 +1,4 @@
-package com.example.e06_persistencia;
+package pack.rafaalt.ex06;
 
 import static android.widget.Toast.*;
 
@@ -50,22 +50,22 @@ public class ProdutoDAO {
         Log.d("Produtos", "Entrouuu");
         ArrayList<Produto> produtos = new ArrayList<>();
         SQLiteDatabase db = database.getReadableDatabase();
-            try {
-                Cursor c = db.query("produtos", null, null, null, null, null, null);
-                if(c.moveToFirst()){
-                    Log.d("Produtos", "if");
-                    do{
-                        Produto p = new Produto(c.getString(c.getColumnIndex("nome")),
-                                                c.getDouble(c.getColumnIndex("preco")));
-                        Log.d("Produtos", p.toString());
-                        produtos.add(p);
-                    }while(c.moveToNext());
-                }
-            }catch (Exception e){
-                Log.e("ProdutoDAO", e.getMessage());
-            }finally {
-                db.close();
+        try {
+            Cursor c = db.query("produtos", null, null, null, null, null, null);
+            if(c.moveToFirst()){
+                Log.d("Produtos", "if");
+                do{
+                    Produto p = new Produto(c.getString(c.getColumnIndex("nome")),
+                            c.getDouble(c.getColumnIndex("preco")));
+                    Log.d("Produtos", p.toString());
+                    produtos.add(p);
+                }while(c.moveToNext());
             }
+        }catch (Exception e){
+            Log.e("ProdutoDAO", e.getMessage());
+        }finally {
+            db.close();
+        }
         return produtos;
     }
 }

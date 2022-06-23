@@ -1,4 +1,4 @@
-package com.example.e06_persistencia;
+package pack.rafaalt.ex06;
 
 import android.content.ContentValues;
 import android.content.Context;

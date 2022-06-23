@@ -7,46 +7,37 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Adicionar Produto"
-        android:textSize="20dp"
-        android:layout_gravity="center"
-        android:textColor="@color/black"
-        android:layout_marginTop="30dp"/>
-    <EditText
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtNome"
-        android:hint="Nome do Produto"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtPreco"
-        android:hint="Preco do Produto"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Tirar foto"
         android:layout_gravity="center"
-        android:text="Adicionar"
-        android:id="@+id/btnAdd"/>
+        android:layout_marginTop="100dp"
+        android:id="@+id/btnTirar"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Mostrar Produtos"
-        android:id="@+id/btnMostrar"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtProdutos"
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginTop="20dp"
-        android:textColor="@color/black"/>
+        android:id="@+id/imagem"
+        android:layout_gravity="center"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Carregar foto"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:id="@+id/btnCarregar"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Segunda tela"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:backgroundTint="@color/green"
+        android:id="@+id/btnProdutos"/>
 
 </LinearLayout>
