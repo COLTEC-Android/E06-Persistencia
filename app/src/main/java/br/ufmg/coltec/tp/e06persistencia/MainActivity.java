@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -41,11 +43,10 @@ public class MainActivity extends AppCompatActivity {
         salvarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // não validei se o arquivo existe - o botão só devia funcionar se a foto tiver sido tirada
 
                 Bitmap bm=((BitmapDrawable)imageView.getDrawable()).getBitmap();
 
-                File file = new File(getApplicationContext().getExternalFilesDir("/"),"foto.png");
+                File file = new File(getApplicationContext().getExternalFilesDir(" / "),"foto.png");
 
                 try{
                     if(Environment.getExternalStorageState(file).equals(Environment.MEDIA_MOUNTED)){
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                         bm.compress(Bitmap.CompressFormat.PNG,90,out);
                         out.flush();
                         out.close();
+                        Toast.makeText(MainActivity.this, "Imagem salva!", Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (Exception e){
