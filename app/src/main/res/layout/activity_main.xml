@@ -44,5 +44,13 @@
         android:paddingBottom="15dp"
         android:text="salvar" />
 
+    <Button
+        android:id="@+id/btn_produtos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_salvar"
+        android:paddingBottom="15dp"
+        android:text="Produtos" />
+
 
 </RelativeLayout>

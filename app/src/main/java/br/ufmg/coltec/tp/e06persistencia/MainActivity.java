@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button fotoBtn=findViewById(R.id.btn_foto);
         Button salvarBtn = findViewById(R.id.btn_salvar);
+        Button produtosBtn = findViewById(R.id.btn_produtos);
 
         fotoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +93,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        produtosBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,ProdutosActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
