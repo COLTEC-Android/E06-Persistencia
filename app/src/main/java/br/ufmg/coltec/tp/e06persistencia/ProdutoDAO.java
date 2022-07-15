@@ -14,10 +14,11 @@ import java.util.Locale;
 public class ProdutoDAO {
 
 
-    public static final String CREATE_SCRIPT = "CREATE TABLE IF NOT EXISTS produtos (\n" +
+    public static final String CREATE_SCRIPT =
+            "CREATE TABLE IF NOT EXISTS produtos (\n" +
             "\tid INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-            "\tname TEXT NOT NULL\n" + "\tvalor FLOAT NOT NULL\n"+
-            ");";
+            "\tname TEXT NOT NULL,\n" +
+            "\tvalor TEXT NOT NULL);";
 
     public static final String TABLE_NAME = "produtos";
     public static final String ID_COLUMN = "id";
@@ -59,7 +60,7 @@ public class ProdutoDAO {
                 do {
                     int id = res.getInt(res.getColumnIndex(ID_COLUMN));
                     String name = res.getString(res.getColumnIndex(NAME_COLUMN));
-                    Float valor = res.getFloat(res.getColumnIndex(VALOR_COLUMN));
+                    String valor = res.getString(res.getColumnIndex(VALOR_COLUMN));
                     produtos.add(new Produto(id, name,valor));
                 } while (res.moveToNext());
             }

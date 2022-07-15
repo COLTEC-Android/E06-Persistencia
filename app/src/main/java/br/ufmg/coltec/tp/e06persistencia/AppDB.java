@@ -6,8 +6,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class AppDB extends SQLiteOpenHelper {
 
-    private static String DB_NAME = "AppDB.sqlite";
-    private static final int DB_VERSION = 1;
+    private static String DB_NAME = "bancoAPP";
+    private static final int DB_VERSION = 3;
 
     public AppDB(Context context){
         super(context, DB_NAME, null, DB_VERSION);
@@ -15,6 +15,7 @@ public class AppDB extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
         db.execSQL(ProdutoDAO.CREATE_SCRIPT);
     }
 
